@@ -1,4 +1,4 @@
-![Screenshot](img/screenshot.img)
+![Screenshot](img/screenshot.png)
 
 # Dell XPS 15 9570 Catalina
 A collection of all resources needed to run macOS Catalina on a Dell XPS 15 9570
