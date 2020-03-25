@@ -104,19 +104,27 @@ If you don't need the touchscreen you can disable it to save power. Replace ```S
 ### Changing Serial Number, Board Serial Number and SmUUID
 NOTE: With the stock Killer Wi-Fi card, iMessage will never work.
 
-To use iMessage and other Apple services, you need to generate your own serial numbers. This can be done using [Hackintool](https://www.tonymacx86.com/threads/release-hackintool-v3-x-x.254559/). Go to the "Serial" tab and make sure model is set to ```MacBookPro15,1```. Use the barcode-with-apple button to check your generated serial numbers. If the website tells you that the serial number isn't valid, everything is fine. Otherwise, you have to generate a new set.
+To use iMessage and other Apple services, you need to generate your own serial numbers. This can be done using [Hackintool](https://www.tonymacx86.com/threads/release-hackintool-v3-x-x.254559/). Go to the “Serial“ tab and make sure model is set to ```MacBookPro15,1```. Use the barcode-with-apple button to check your generated serial numbers. If the website tells you that the serial number isn't valid, everything is fine. Otherwise, you have to generate a new set.
 
 Next you will have to copy the following values from Hackintool to your ```config.plist```:
 - Serial Number -> ```Root/PlatformInfo/Generic/SystemSerialNumber```
 - Board Number -> ```Root/PlatformInfo/Generic/MLB```
 - SmUUID -> ```Root/PlatformInfo/Generic/SystemUUID```
 
-Reboot and Apple services should work. 
+Reboot and Apple services should work.
+
+## Tweaks
+This section talks about various optional tweaks that enhance your experience
+
+### Undervolting
+Undervolting your CPU can reduce heat, improve performance and provide longer battery life. However, if done incorrectly, it may cause an unstable system. The ```tools``` folder contains a patched version of [VoltageShift](https://github.com/sicreative/VoltageShift).
+
+Using ```./voltageshift offset <CPU> <GPU> <CPUCache>``` you can adjust the voltage offset for the CPU, GPU, and cache. Safe starting values are ```-100, -75, -100```. From there you can start gradually lowering the values until your system gets unstable.
 
 ## Frequently Asked Questions
 
 ### Why my trackpad doesn't work?
-In macOS, the PrintScreen button (PrtScr, to the right of F12) disables/enables the trackpad instead of disabling/enabling wifi as it says. Probably you just pressed that button by accident.
+In macOS, the “PrintScreen“ button (PrtScr, to the right of F12) disables/enables the trackpad instead of disabling/enabling wifi as it says. Probably you just pressed that button by accident.
 
 ### I have a Samsung PM981 SSD, will it work?
 The Samsung PM981 (or more precise the controller it uses) is known to cause random kernel panics in macOS. Up until now, there was no way to even install macOS on the PM981 and the only option was to replace it with either a SATA or a known working NVMe SSD. However, recently a new set of patches, namely [NVMeFix](https://github.com/acidanthera/NVMeFix) was released. It greatly improves compatibility with non-apple SSDs including the PM981. Thanks to those patches, you can now install macOS, but there is still a chance for kernel panics to occur while booting. In this case, you can clear the NVRAM from the OpenCore boot menu as a workaround to get it booting again. Since I don't own a PM981 myself, I can't debug this issue, but [frbuccoliero](https://github.com/frbuccoliero) is currently testing a potential fix.
