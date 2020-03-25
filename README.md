@@ -101,20 +101,17 @@ CPU power management is done by ```CPUFriend.kext``` while ```CPUFriendDataProvi
 ### Touchscreen
 If you don't need the touchscreen you can disable it to save power. Replace ```SSDT-TPDX.aml``` in ```EFI/OC/ACPI``` with the one inside the ```resources``` folder.
 
-### iMessage and AppStore
-NOTE: With the killer wifi card, iMessage is not working, even with this fix. Swap to a Broadcom card to make it work.
-To get iMessage and other Apple services working properly you need to change a few settings in your config.plist:
-+ Serial Number
-+ Board Number
-+ SmUUID
-To get them you can generate from (Hackintool)[https://www.tonymacx86.com/threads/release-hackintool-v3-x-x.254559/] , remember that our SMBIOS is MacBookPro15,1. Before adding them to our config.plist , we need to check the serial. 
-First of all we'll go on (this)[https://everymac.com/ultimate-mac-lookup/] website and we'll prompt our serial. If it displays correctly our Mac model, we can go on checking the same serial on (Apple's website)[https://checkcoverage.apple.com] . Now pay attention: if Apple's website says that *SERIAL ISN'T VALID* that is good , we can use that serial. If it says it's a valid one, we gonna need to generate another serial and of course another board number, that changes according to the serial. 
-Once we've got all the things, we can open our config.plist with ProperTree and edit Root/PlatformInfo/Generic/
-+ Serial Number -> SystemSerialNumber
-+ Board Number -> MLB
-+ SmUUID -> SystemUUID
+### Changing Serial Number, Board Serial Number and SmUUID
+NOTE: With the stock Killer Wi-Fi card, iMessage will never work.
 
-Reboot and things should work. 
+To use iMessage and other Apple services, you need to generate your own serial numbers. This can be done using [Hackintool](https://www.tonymacx86.com/threads/release-hackintool-v3-x-x.254559/). Go to the "Serial" tab and make sure model is set to ```MacBookPro15,1```. Use the barcode-with-apple button to check your generated serial numbers. If the website tells you that the serial number isn't valid, everything is fine. Otherwise, you have to generate a new set.
+
+Next you will have to copy the following values from Hackintool to your ```config.plist```:
+- Serial Number -> ```Root/PlatformInfo/Generic/SystemSerialNumber```
+- Board Number -> ```Root/PlatformInfo/Generic/MLB```
+- SmUUID -> ```Root/PlatformInfo/Generic/SystemUUID```
+
+Reboot and Apple services should work. 
 
 ## Frequently Asked Questions
 
