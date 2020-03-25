@@ -116,16 +116,16 @@ Once we've got all the things, we can open our config.plist with ProperTree and 
 
 Reboot and things should work. 
 
-## Frequently asked questions
+## Frequently Asked Questions
 
 ### Why my trackpad doesn't work?
-You pressed the "Stamp" button (right of F12) that instead of enabling/disabling wifi as it says, it enables/disables the trackpad. Good to know
+In macOS, the PrintScreen button (PrtScr, to the right of F12) disables/enables the trackpad instead of disabling/enabling wifi as it says. Probably you just pressed that button by accident.
 
 ### I have a Samsung PM981 SSD, will it work?
-Currently under testing, but with a fix seems to work. Will add the fix to readme if testing goes well.
+The Samsung PM981 (or more precise the controller it uses) is known to cause random kernel panics in macOS. Up until now, there was no way to even install macOS on the PM981 and the only option was to replace it with either a SATA or a known working NVMe SSD. However, recently a new set of patches, namely [NVMeFix](https://github.com/acidanthera/NVMeFix) was released. It greatly improves compatibility with non-apple SSDs including the PM981. Thanks to those patches, you can now install macOS, but there is still a chance for kernel panics to occur while booting. In this case, you can clear the NVRAM from the OpenCore boot menu as a workaround to get it booting again. Since I don't own a PM981 myself, I can't debug this issue, but [frbuccoliero](https://github.com/frbuccoliero) is currently testing a potential fix.
 
-### At startup the loading bar arrives at 90% but then reboots, what is it?
-You have a PM981 Samsung SSD, as stated above, we're working on that. But you can temporary fix resetting NVRAM from OC before each boot.
+### My XPS reboots once the loading bar with the apple has reached approximately 90%
+You probably have a Samsung PM981 SSD. As stated above, we're working on a permanent fix.  In the meantime, you will have to reset NVRAM from the OpenCore menu before each boot.
 
 ## Acknowledgments
 - [acidanthera](https://github.com/acidanthera) for providing almost all kexts and drivers
@@ -135,4 +135,5 @@ You have a PM981 Samsung SSD, as stated above, we're working on that. But you ca
 - [knnspeed](https://www.tonymacx86.com/threads/guide-dell-xps-15-9560-4k-touch-1tb-ssd-32gb-ram-100-adobergb.224486) for providing ComboJack, well-explained hotpatches and a working USB-C hot plug solution
 - [bavariancake](https://github.com/bavariancake/XPS9570-macOS) and [LuletterSoul](https://github.com/LuletterSoul/Dell-XPS-15-9570-macOS-Mojave) for providing detailed installation guides and configurations for the XPS 9570
 - [xxxzc](https://github.com/xxxzc/xps15-9550-macos) for providing OpenCore support for the XPS 9570
+- [frbuccoliero](https://github.com/frbuccoliero) for PM981 related testing and extending the guide
 - Everyone else involved in Hackintosh development
