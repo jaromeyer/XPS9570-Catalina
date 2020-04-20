@@ -3,7 +3,7 @@
 # Dell XPS 15 9570 Catalina
 A collection of all resources needed to run macOS Catalina on a Dell XPS 15 9570
 
-## Overview
+## 🔍 Overview
 This is more of a compilation of information and configs from various repositories and forums than a place where real development happens. This repository should contain everything needed to get Catalina up and running on your specific Dell XPS 9570 configuration.
 
 ### Currently not working
@@ -13,7 +13,7 @@ This is more of a compilation of information and configs from various repositori
 - Stock Killer Wi-Fi (easily replaced)
 - (Thunderbolt) not tested
 
-## Installation
+## ⬇️ Installation
 Follow this guide if you have never set up a Hackintosh before.
 
 ### Creating a bootable installer
@@ -50,15 +50,15 @@ Congratulations! You have successfully booted and installed macOS. At this point
 
 and copy your customized EFI folder into the newly mounted EFI partition. You should now be able to boot your computer without the USB flash drive attached. If you're having issues with specific parts like Wi-Fi, Bluetooth or Audio, have a look at the corresponding sections in this repository and open an issue if you are unable to solve them.
 
-## Configuration
+## 🛠 Configuration
 This section talks about configuring the EFI folder for your exact hardware.
 
 Almost all changes are done inside the OpenCore configuration file. Use the provided version of [ProperTree](https://github.com/corpnewt/ProperTree) to edit ```EFI/OC/config.plist```.
 
-### Audio
+### 🔈 Audio
 By default, the audio can be a bit buggy. When using headphones, after some time the audio randomly stops. Sometimes un- and replugging the headphones works, but that's pretty annoying and unreliable. To permanently fix this issue you will have to install [ComboJack](https://github.com/hackintosh-stuff/ComboJack/tree/master/ComboJack_Installer) from the ```tools``` folder by running ```install.sh```.
 
-### Wi-Fi/Bluetooth
+### 📶 Wi-Fi/Bluetooth
 The stock Killer Wi-Fi card will never be supported in macOS. So to use Wi-Fi, you will have to replace it for a supported card. This repository is configured to work out-of-the-box with both the Dell DW1830 and DW1560 wireless adapter.
 
 Another option for a fraction of the price is the [Dell DW1820a](https://www.aliexpress.com/item/32918457901.html). It is a bit slower than the cards mentioned above and in my experience has problems with some 5GHz networks, but with a minor modification, you can make it work pretty reliably. The only change that has to be done is disabling “Active State Power Management”. This can be done by inserting the following entry under ```Root/DeviceProperties/Add```.
@@ -71,7 +71,7 @@ Another option for a fraction of the price is the [Dell DW1820a](https://www.ali
 </dict>
 ```
 
-### Display
+### 📺 Display
 This repository is configured to work properly with the 4K display. If you have a FHD screen, you should apply two minor changes:
 
 - Change ```dpcd-max-link-rate``` in ```Root/DeviceProperties/Add/PciRoot(0x0)/Pci(0x2,0x0)``` from ```14000000``` to ```0A000000```
@@ -81,7 +81,7 @@ Also, I strongly suggest enabling subpixel antialiasing for the FHD screen.
 
 ```defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO```
 
-### Power management
+### 🔋 Power management
 Hibernation is not supported on a Hackintosh and everything related to it should be completely disabled. Disabling additional features prevents random wakeups while the lid is closed. After every update, these settings should be reapplied manually.
 
 ```
@@ -95,13 +95,13 @@ sudo pmset -a proximitywake 0
 sudo pmset -b tcpkeepalive 0 (optional)
 ```
 
-### Performance
+### ⚡️ Performance
 CPU power management is done by ```CPUFriend.kext``` while ```CPUFriendDataProvider.kext``` defines how it should be done. ```CPUFriendDataProvider.kext``` is generated for a specific CPU and power setting. The one supplied in this repository was made for the i7-8750H and is optimized for maximum performance. In case you have another CPU or would rather sacrifice some performance in trade for more battery life, you can use the script [one-key-cpufriend](https://github.com/stevezhengshiqi/one-key-cpufriend) from the ```tools``` folder to generate your own ```CPUFriendDataProvider.kext```.
 
-### Touchscreen
+### 👈 Touchscreen
 If you don't need the touchscreen you can disable it to save power. Replace ```SSDT-TPDX.aml``` in ```EFI/OC/ACPI``` with the one inside the ```resources``` folder.
 
-### Changing Serial Number, Board Serial Number and SmUUID
+### ℹ️ Changing Serial Number, Board Serial Number and SmUUID
 NOTE: With the stock Killer Wi-Fi card, iMessage will never work.
 
 To use iMessage and other Apple services, you need to generate your own serial numbers. This can be done using [Hackintool](https://www.tonymacx86.com/threads/release-hackintool-v3-x-x.254559/). Go to the “Serial“ tab and make sure model is set to ```MacBookPro15,1```. Use the barcode-with-apple button to check your generated serial numbers. If the website tells you that the serial number isn't valid, everything is fine. Otherwise, you have to generate a new set.
@@ -113,15 +113,15 @@ Next you will have to copy the following values from Hackintool to your ```confi
 
 Reboot and Apple services should work.
 
-## Tweaks
+## 🔧 Tweaks
 This section talks about various optional tweaks that enhance your experience
 
-### Undervolting
+### ⤵️ Undervolting
 Undervolting your CPU can reduce heat, improve performance and provide longer battery life. However, if done incorrectly, it may cause an unstable system. The ```tools``` folder contains a patched version of [VoltageShift](https://github.com/sicreative/VoltageShift).
 
 Using ```./voltageshift offset <CPU> <GPU> <CPUCache>``` you can adjust the voltage offset for the CPU, GPU, and cache. Safe starting values are ```-100, -75, -100```. From there you can start gradually lowering the values until your system gets unstable.
 
-## Frequently Asked Questions
+## 🤔 Frequently Asked Questions
 
 ### Why my trackpad doesn't work?
 In macOS, the “PrintScreen“ button (PrtScr, to the right of F12) disables/enables the trackpad instead of disabling/enabling wifi as it says. Probably you just pressed that button by accident.
