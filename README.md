@@ -6,6 +6,26 @@ A collection of all resources needed to run macOS Catalina on a Dell XPS 15 9570
 ## 🔍 Overview
 This is more of a compilation of information and configs from various repositories and forums than a place where real development happens. This repository should contain everything needed to get Catalina up and running on your specific Dell XPS 9570 configuration.
 
+## What works and what doesn't
+
+| Feature | Status | Notes |
+| ------------- | ------------- | ------------- |
+| **Intel iGPU** | ✅ Working | Fully supported, needs some tuning if you have 1080p screen [here](#📺-display)  |
+| **iMessages and App Store** | ✅ Working | Just follow the  [guide below](#ℹ️-changing-serial-number,-board-serial-number-and-smuuid) |
+| **Speakers and Headphones** | ✅ Working | To fix headphones follow the [guide below](#🔈-audio)  |
+| **Built-in Microphone** | ✅ Working |  |
+| **Webcam** | ✅ Working | It gets recognized as internal webcam  |
+| **Handoff** | 🔵 Testing |  |
+| **Airdrop** | 🔵 Testing |  |
+| **Unlock with Watch** | 🔵 Testing |  |
+| **Wifi/BT Card** | 🔶 To replace | The stock Killer Wifi must be replaced, see [here](#📶-Wi-Fi/Bluetooth) |
+| **Thunderbolt** | 🔶 Partially working | It needs to be plugged before booting up. USB-C port for energy supply can be used in hotplug too, but probably won't delivery sufficient power (XPS needs 130W, almost no usb charger can supply that amount of power).  |
+| **Touchscreen** | 🔶 Works but | The touchscreen capability seems to work but the power management isn't good. [Battery drain](#1) is very high. You can [disable](#👈-touchscreen) it |
+| **NVIDIA GPU** | ❌ Not working | Will never work on > High Sierra because Apple doesn't support NVIDIA GPUs anymore |
+| **PM981 SSD** | ❌ Not working | Even if [NVMeFix](https://github.com/acidanthera/NVMeFix) 1.0.2 promises to fix the PM981 Kernel Panics, it doesn't. Just replace it with a SATA M.2 drive or a supported NVMe one. |
+| **Fingerprint reader** | ❌ Not working | Probably will never work. NoTouchId kext disables it automatically to save power |
+| **SD Reader** | ❌ Not working | Works on Windows, if you don't dualboot disable it in bios to save power |
+
 ### Currently not working
 - Discrete GPU (Nvidia)
 - Fingerprint Reader
