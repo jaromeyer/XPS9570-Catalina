@@ -26,13 +26,6 @@ This is more of a compilation of information and configs from various repositori
 | **Fingerprint reader** | ❌ Not working | Probably will never work. NoTouchId kext disables it automatically to save power |
 | **SD Reader** | ❌ Not working | Works on Windows, if you don't dualboot disable it in bios to save power |
 
-### Currently not working
-- Discrete GPU (Nvidia)
-- Fingerprint Reader
-- SD Reader
-- Stock Killer Wi-Fi (easily replaced)
-- (Thunderbolt) not tested
-
 ## ⬇️ Installation
 Follow this guide if you have never set up a Hackintosh before.
 
