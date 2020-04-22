@@ -15,8 +15,8 @@ This is more of a compilation of information and configs from various repositori
 | **Speakers and Headphones** | ✅ Working | To fix headphones follow the [guide below](#🔈-audio)  |
 | **Built-in Microphone** | ✅ Working |  |
 | **Webcam** | ✅ Working | It gets recognized as internal webcam  |
+| **Airdrop** | ✅ Working |  |
 | **Handoff** | 🔵 Testing |  |
-| **Airdrop** | 🔵 Testing |  |
 | **Unlock with Watch** | 🔵 Testing |  |
 | **Wifi/BT Card** | 🔶 To replace | The stock Killer Wifi must be replaced, see [here](#📶-Wi-Fi/Bluetooth) |
 | **Thunderbolt** | 🔶 Partially working | It needs to be plugged before booting up. USB-C port for energy supply can be used in hotplug too, but probably won't delivery sufficient power (XPS needs 130W, almost no usb charger can supply that amount of power).  |
