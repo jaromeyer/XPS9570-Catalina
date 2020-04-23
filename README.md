@@ -16,8 +16,8 @@ This is more of a compilation of information and configs from various repositori
 | **Built-in Microphone** | ✅ Working |  |
 | **Webcam** | ✅ Working | It gets recognized as internal webcam  |
 | **Airdrop** | ✅ Working |  |
-| **Handoff** | 🔵 Testing |  |
-| **Unlock with Watch** | 🔵 Testing |  |
+| **Handoff** | ✅ Working |  |
+| **Unlock with Watch** | ✅ Working |  |
 | **Wifi/BT Card** | 🔶 To replace | The stock Killer Wifi must be replaced, see [here](#📶-Wi-Fi/Bluetooth) |
 | **Thunderbolt** | 🔶 Partially working | It needs to be plugged before booting up. USB-C port for energy supply can be used in hotplug too, but probably won't delivery sufficient power (XPS needs 130W, almost no usb charger can supply that amount of power).  |
 | **Touchscreen** | 🔶 Works but | The touchscreen capability seems to work but the power management isn't good. [Battery drain](#1) is very high. You can [disable](#👈-touchscreen) it |
@@ -83,6 +83,8 @@ Another option for a fraction of the price is the [Dell DW1820a](https://www.ali
     <integer>0</integer>
 </dict>
 ```
+
+If you have a DW1820a you will also need to install special BRCMBluetooth Kexts (Injector,Data and RAM2) in order to have Apple Continuity services working. You will find them in the DW1820a folder
 
 ### 📺 Display
 This repository is configured to work properly with the 4K display. If you have a FHD screen, you should apply two minor changes:
