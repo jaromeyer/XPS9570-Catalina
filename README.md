@@ -13,13 +13,12 @@ This is more of a compilation of information and configs from various repositori
 | **Intel iGPU** | ✅ Working | Fully supported, needs some tuning if you have 1080p screen [here](#📺-display)  |
 | HDMI/DisplayPort | ✅ Working | 2560x1440@144Hz over HDMI and 4k@60Hz over DisplayPort have been tested. |
 | **Trackpad** |  ✅ Working | Full gesture support. Probably the best trackpad experience on a non-mac.
-| **iMessages and App Store** | 🔵 Testing | Broken af tbh. Just follow the  [guide below](#ℹ️-changing-serial-number,-board-serial-number-and-smuuid) |
+| **iMessages and App Store** | ✅ Working | Just follow the  [guide below](#ℹ️-changing-serial-number,-board-serial-number-and-smuuid) |
 | **Speakers and Headphones** | ✅ Working | To fix headphones follow the [guide below](#🔈-audio) |
 | **Built-in Microphone** | ✅ Working |
 | **Webcam** | ✅ Working | Fully working, is detected as Integrated Webcam |
 | **Handoff** | ✅ Working |  |
 | **Unlock with Watch** | 🔶 Buggy | Works but it tends to disable itself after sleep or reboot |
-| **Unlock with Watch** | ✅ Working |
 | **Wi-Fi/BT** | 🔶 Working, but not OOB | The stock Killer card must be replaced with a compatible one. See [here](#📶-Wi-Fi/Bluetooth). |
 | **Thunderbolt/USB-C** | 🔶 Partially working | Normal USB-C and charging work as intended. Thunderbolt works, but hotplugging is broken. Thunderbolt devices and dockingstations have to be attached prior to boot to work properly. However display over Thunderbolt seems to hotplug fine. |
 | **Touchscreen** | 🔶 Working, but high power consumption | The touchscreen works fine and emulates a huge trackpad. This means you can do all native MacOS gestures. However power management isn't that great. [Battery drain](#1) is very high. If you don't need it, you can [disable](#👈-touchscreen) it completely. |
@@ -127,6 +126,8 @@ Next you will have to copy the following values from Hackintool to your ```confi
 - SmUUID -> ```Root/PlatformInfo/Generic/SystemUUID```
 
 Reboot and Apple services should work.
+
+If they don't follow [this](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/iservices.html) guide to change serial,MLB and UUID. It goes deeper into ROM, clearing NVRAM, Keychain (missing this step might cause major issues) and much more.
 
 ## 🔧 Tweaks
 This section talks about various optional tweaks that enhance your experience
