@@ -17,8 +17,8 @@ This is more of a compilation of information and configs from various repositori
 | **Speakers and Headphones** | ✅ Working | To fix headphones follow the [guide below](#🔈-audio) |
 | **Built-in Microphone** | ✅ Working |
 | **Webcam** | ✅ Working | Fully working, is detected as Integrated Webcam |
-| **Airdrop** | ✅ Working |
-| **Handoff** | ✅ Working |
+| **Handoff** | ✅ Working |  |
+| **Unlock with Watch** | 🔶 Buggy | Works but it tends to disable itself after sleep or reboot |
 | **Unlock with Watch** | ✅ Working |
 | **Wi-Fi/BT** | 🔶 Working, but not OOB | The stock Killer card must be replaced with a compatible one. See [here](#📶-Wi-Fi/Bluetooth). |
 | **Thunderbolt/USB-C** | 🔶 Partially working | Normal USB-C and charging work as intended. Thunderbolt works, but hotplugging is broken. Thunderbolt devices and dockingstations have to be attached prior to boot to work properly. However display over Thunderbolt seems to hotplug fine. |
@@ -53,7 +53,7 @@ Find the EFI partition of your USB flash drive. Normally its entry 1 under /dev/
 Now that you have access to the EFI partition, the real fun starts.
 
 ### Configuring EFI
-Clone this repository to get the base EFI folder as well as all additional kexts and patches. Now you will have to prepare the EFI folder for your exact hardware configuration. Read through the [configuration section](#configuration) to learn more. Once everything is configured properly, copy the folder into the EFI partition you have mounted in the previous step.
+Clone this repository to get the base EFI folder as well as all additional kexts and patches. Now you will have to prepare the EFI folder for your exact hardware configuration. There are four different configs. Rename the one that matches your specific XPS and rename it to ```config.plist```. Read through the [configuration section](#configuration) to learn more. Once everything is configured properly, copy the folder into the EFI partition you have mounted in the previous step.
 
 ### Booting the installer
 After having created the installer USB flash drive, you are ready to install macOS on your XPS. Make sure SSD mode is set to AHCI mode instead of RAID in BIOS otherwise, macOS won't be able to detect your SSD. Select your USB flash drive as boot media and go through the macOS installer like you would on a real mac. Once you have come to the desktop, advance to the next step.
@@ -87,7 +87,7 @@ Another option for a fraction of the price is the [Dell DW1820a](https://www.ali
 ```
 
 ### 📺 Display
-This repository is configured to work properly with the 4K display. If you have a FHD screen, you should apply two minor changes:
+This repository contains configs for both FHD and 4K. Just choose the one that matches your setup. The only differences between 4K and FHD are:
 
 - Change ```dpcd-max-link-rate``` in ```Root/DeviceProperties/Add/PciRoot(0x0)/Pci(0x2,0x0)``` from ```14000000``` to ```0A000000```
 - Change ```UIScale``` in ```Root/NVRAM/Add/4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14``` from ```02``` to ```01```
