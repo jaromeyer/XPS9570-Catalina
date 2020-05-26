@@ -112,13 +112,7 @@
 		<dict>
 			<key>AvoidRuntimeDefrag</key>
 			<true/>
-			<key>DevirtualiseMmio</key>
-			<true/>
-			<key>EnableSafeModeSlide</key>
-			<true/>
-			<key>ProvideCustomSlide</key>
-			<true/>
-			<key>RebuildAppleMemoryMap</key>
+			<key>EnableWriteUnprotector</key>
 			<true/>
 			<key>SetupVirtualMap</key>
 			<true/>
@@ -426,6 +420,8 @@
 			<true/>
 			<key>CustomSMBIOSGuid</key>
 			<true/>
+			<key>DisableRtcChecksum</key>
+			<true/>
 			<key>LapicKernelPanic</key>
 			<true/>
 			<key>PowerTimeoutKernelPanic</key>
@@ -444,12 +440,12 @@
 		<dict>
 			<key>HibernateMode</key>
 			<string>None</string>
-			<key>HideSelf</key>
-			<true/>
 			<key>ShowPicker</key>
 			<true/>
 			<key>Timeout</key>
 			<integer>2</integer>
+			<key>HideSelf</key>
+			<true/>
 			<key>PickerMode</key>
 			<string>External</string>
 		</dict>
@@ -532,6 +528,13 @@
 	</dict>
 	<key>UEFI</key>
 	<dict>
+		<key>APFS</key>
+		<dict>
+			<key>EnableJumpstart</key>
+			<true/>
+			<key>HideVerbose</key>
+			<true/>
+		</dict>
 		<key>ConnectDrivers</key>
 		<true/>
 		<key>Drivers</key>
@@ -563,7 +566,7 @@
 			<key>SanitiseClearScreen</key>
 			<true/>
 		</dict>
-		<key>Protocols</key>
+		<key>ProtocolOverrides</key>
 		<dict>
 			<key>AppleSmcIo</key>
 			<true/>
