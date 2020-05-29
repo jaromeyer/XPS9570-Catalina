@@ -10,21 +10,21 @@ This is more of a compilation of information and configs from various repositori
 
 | Feature | Status | Notes |
 | ------------- | ------------- | ------------- |
-| **Intel iGPU** | ✅ Working | Fully supported, needs some tuning if you have 1080p screen [here](#📺-display)  |
+| **Intel iGPU** | ✅ Working | Fully supported. Both 2560x1440@144Hz over HDMI and 4k@60Hz over DisplayPort have been tested |
+| **Trackpad** |  ✅ Working | Full gesture support. Probably the best trackpad experience on a non-mac.
 | **iMessages and App Store** | ✅ Working | Just follow the  [guide below](#ℹ️-changing-serial-number,-board-serial-number-and-smuuid) |
-| **Speakers and Headphones** | ✅ Working | To fix headphones follow the [guide below](#🔈-audio)  |
-| **Built-in Microphone** | ✅ Working |  |
-| **Webcam** | ✅ Working | It gets recognized as internal webcam  |
-| **Airdrop** | ✅ Working |  |
-| **Handoff** | 🔵 Testing |  |
-| **Unlock with Watch** | 🔵 Testing |  |
-| **Wifi/BT Card** | 🔶 To replace | The stock Killer Wifi must be replaced, see [here](#📶-Wi-Fi/Bluetooth) |
-| **Thunderbolt** | 🔶 Partially working | It needs to be plugged before booting up. USB-C port for energy supply can be used in hotplug too, but probably won't delivery sufficient power (XPS needs 130W, almost no usb charger can supply that amount of power).  |
-| **Touchscreen** | 🔶 Works but | The touchscreen capability seems to work but the power management isn't good. [Battery drain](#1) is very high. You can [disable](#👈-touchscreen) it |
-| **NVIDIA GPU** | ❌ Not working | Will never work on > High Sierra because Apple doesn't support NVIDIA GPUs anymore |
-| **PM981 SSD** | ❌ Not working | Even if [NVMeFix](https://github.com/acidanthera/NVMeFix) 1.0.2 promises to fix the PM981 Kernel Panics, it doesn't. Just replace it with a SATA M.2 drive or a supported NVMe one. |
-| **Fingerprint reader** | ❌ Not working | Probably will never work. NoTouchId kext disables it automatically to save power |
-| **SD Reader** | ❌ Not working | Works on Windows, if you don't dualboot disable it in bios to save power |
+| **Speakers and Headphones** | ✅ Working | To permanently fix headphones follow the instructions [here](#🔈-audio) |
+| **Built-in Microphone** | ✅ Working |
+| **Webcam** | ✅ Working | Fully working, is detected as Integrated Webcam |
+| **Handoff** | ✅ Working |
+| **Unlock with Watch** | 🔶 Buggy | Works, but it tends to disable itself after sleep or reboot |
+| **Wi-Fi/BT** | 🔶 Working, but not OOB | The stock Killer card must be replaced with a compatible one. See [here](#📶-Wi-Fi/Bluetooth) |
+| **Thunderbolt/USB-C** | 🔶 Partially working | Normal USB-C and charging work as intended. Thunderbolt works, but hotplugging is broken. Thunderbolt devices and docking stations have to be attached prior to boot to work properly. However, display over Thunderbolt seems to hotplug fine. |
+| **Touchscreen** | 🔶 Working, but high power consumption | The touchscreen works fine and emulates a huge trackpad. This means you can do all native macOS gestures. However, power management isn't that great. [Battery drain](#1) is very high. If you don't need it, you can [disable](#👈-touchscreen) it completely. |
+| **NVIDIA GPU** | ❌ Not working | Will never work because of Nvidia Optimus and Apple completely dropped Nvidia support beginning with Mojave. Thus it's completely disabled to save power. |
+| **PM981 SSD** | ❌ Not working | Even with [NVMeFix](https://github.com/acidanthera/NVMeFix), which promises to fix Kernel Panics caused by the PM981, there are random shutdowns. Just replace it with a SATA M.2 drive or a supported NVMe one. |
+| **Fingerprint reader** | ❌ Not working | Probably will never work, because proprietary Goodix drivers that only exist for Windows are needed. Disabled to save power. |
+| **SD Reader** | ❌ Not working | If you don't dual boot Windows, you can disable it in the BIOS to save power. |
 
 ## ⬇️ Installation
 Follow this guide if you have never set up a Hackintosh before.
@@ -51,7 +51,7 @@ Find the EFI partition of your USB flash drive. Normally its entry 1 under /dev/
 Now that you have access to the EFI partition, the real fun starts.
 
 ### Configuring EFI
-Clone this repository to get the base EFI folder as well as all additional kexts and patches. Now you will have to prepare the EFI folder for your exact hardware configuration. Read through the [configuration section](#configuration) to learn more. Once everything is configured properly, copy the folder into the EFI partition you have mounted in the previous step.
+Clone this repository to get the base EFI folder as well as all additional kexts and patches. Now you will have to prepare the EFI folder for your exact hardware configuration. There are four different configs. Find the one that matches your specific XPS model and rename it to ```config.plist```. Read through the [configuration section](#configuration) to learn more about the different options. Once everything is configured properly, copy the folder into the EFI partition you have mounted in the previous step.
 
 ### Booting the installer
 After having created the installer USB flash drive, you are ready to install macOS on your XPS. Make sure SSD mode is set to AHCI mode instead of RAID in BIOS otherwise, macOS won't be able to detect your SSD. Select your USB flash drive as boot media and go through the macOS installer like you would on a real mac. Once you have come to the desktop, advance to the next step.
@@ -61,7 +61,7 @@ Congratulations! You have successfully booted and installed macOS. At this point
 
 ```sudo diskutil mount disk0s1```
 
-and copy your customized EFI folder into the newly mounted EFI partition. You should now be able to boot your computer without the USB flash drive attached. If you're having issues with specific parts like Wi-Fi, Bluetooth or Audio, have a look at the corresponding sections in this repository and open an issue if you are unable to solve them.
+and copy your customized EFI folder into the newly mounted EFI partition. You should now be able to boot your computer without the USB flash drive attached. If you're having issues with specific parts like Wi-Fi, Bluetooth, or Audio, have a look at the corresponding sections in this repository and open an issue if you are unable to solve them.
 
 ## 🛠 Configuration
 This section talks about configuring the EFI folder for your exact hardware.
@@ -85,7 +85,7 @@ Another option for a fraction of the price is the [Dell DW1820a](https://www.ali
 ```
 
 ### 📺 Display
-This repository is configured to work properly with the 4K display. If you have a FHD screen, you should apply two minor changes:
+This repository contains configs for both FHD and 4K. Just choose the one that matches your setup. The only differences between 4K and FHD are:
 
 - Change ```dpcd-max-link-rate``` in ```Root/DeviceProperties/Add/PciRoot(0x0)/Pci(0x2,0x0)``` from ```14000000``` to ```0A000000```
 - Change ```UIScale``` in ```Root/NVRAM/Add/4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14``` from ```02``` to ```01```
@@ -114,7 +114,7 @@ CPU power management is done by ```CPUFriend.kext``` while ```CPUFriendDataProvi
 ### 👈 Touchscreen
 If you don't need the touchscreen you can disable it to save power. Replace ```SSDT-TPDX.aml``` in ```EFI/OC/ACPI``` with the one inside the ```resources``` folder.
 
-### ℹ️ Changing Serial Number, Board Serial Number and SmUUID
+### ℹ️ Changing Serial Number, Board Serial Number, and SmUUID
 NOTE: With the stock Killer Wi-Fi card, iMessage will never work.
 
 To use iMessage and other Apple services, you need to generate your own serial numbers. This can be done using [Hackintool](https://www.tonymacx86.com/threads/release-hackintool-v3-x-x.254559/). Go to the “Serial“ tab and make sure model is set to ```MacBookPro15,1```. Use the barcode-with-apple button to check your generated serial numbers. If the website tells you that the serial number isn't valid, everything is fine. Otherwise, you have to generate a new set.
@@ -126,11 +126,13 @@ Next you will have to copy the following values from Hackintool to your ```confi
 
 Reboot and Apple services should work.
 
+If they don't, follow [this in-depth guide](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/iservices.html). It goes deeper into ROM, clearing NVRAM, clearing Keychain (missing this step might cause major issues), and much more.
+
 ## 🔧 Tweaks
 This section talks about various optional tweaks that enhance your experience
 
 ### ⤵️ Undervolting
-Undervolting your CPU can reduce heat, improve performance and provide longer battery life. However, if done incorrectly, it may cause an unstable system. The ```tools``` folder contains a patched version of [VoltageShift](https://github.com/sicreative/VoltageShift).
+Undervolting your CPU can reduce heat, improve performance, and provide longer battery life. However, if done incorrectly, it may cause an unstable system. The ```tools``` folder contains a patched version of [VoltageShift](https://github.com/sicreative/VoltageShift).
 
 Using ```./voltageshift offset <CPU> <GPU> <CPUCache>``` you can adjust the voltage offset for the CPU, GPU, and cache. Safe starting values are ```-100, -75, -100```. From there you can start gradually lowering the values until your system gets unstable.
 
