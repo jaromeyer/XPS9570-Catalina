@@ -19,12 +19,12 @@ This is more of a compilation of information and configs from various repositori
 | **Handoff** | ✅ Working |
 | **Unlock with Watch** | 🔶 Buggy | Works, but it tends to disable itself after sleep or reboot |
 | **Wi-Fi/BT** | 🔶 Working, but not OOB | The stock Killer card must be replaced with a compatible one. See [here](#📶-Wi-Fi/Bluetooth) |
-| **Thunderbolt/USB-C** | 🔶 Partially working | Normal USB-C and charging work as intended. Thunderbolt works, but hotplugging is broken. Thunderbolt devices and dockingstations have to be attached prior to boot to work properly. However display over Thunderbolt seems to hotplug fine. |
-| **Touchscreen** | 🔶 Working, but high power consumption | The touchscreen works fine and emulates a huge trackpad. This means you can do all native MacOS gestures. However power management isn't that great. [Battery drain](#1) is very high. If you don't need it, you can [disable](#👈-touchscreen) it completely. |
+| **Thunderbolt/USB-C** | 🔶 Partially working | Normal USB-C and charging work as intended. Thunderbolt works, but hotplugging is broken. Thunderbolt devices and docking stations have to be attached prior to boot to work properly. However, display over Thunderbolt seems to hotplug fine. |
+| **Touchscreen** | 🔶 Working, but high power consumption | The touchscreen works fine and emulates a huge trackpad. This means you can do all native macOS gestures. However, power management isn't that great. [Battery drain](#1) is very high. If you don't need it, you can [disable](#👈-touchscreen) it completely. |
 | **NVIDIA GPU** | ❌ Not working | Will never work because of Nvidia Optimus and Apple completely dropped Nvidia support beginning with Mojave. Thus it's completely disabled to save power. |
 | **PM981 SSD** | ❌ Not working | Even with [NVMeFix](https://github.com/acidanthera/NVMeFix), which promises to fix Kernel Panics caused by the PM981, there are random shutdowns. Just replace it with a SATA M.2 drive or a supported NVMe one. |
 | **Fingerprint reader** | ❌ Not working | Probably will never work, because proprietary Goodix drivers that only exist for Windows are needed. Disabled to save power. |
-| **SD Reader** | ❌ Not working | If you don't dualboot Windows, you can disable it in the BIOS to save power. |
+| **SD Reader** | ❌ Not working | If you don't dual boot Windows, you can disable it in the BIOS to save power. |
 
 ## ⬇️ Installation
 Follow this guide if you have never set up a Hackintosh before.
@@ -61,7 +61,7 @@ Congratulations! You have successfully booted and installed macOS. At this point
 
 ```sudo diskutil mount disk0s1```
 
-and copy your customized EFI folder into the newly mounted EFI partition. You should now be able to boot your computer without the USB flash drive attached. If you're having issues with specific parts like Wi-Fi, Bluetooth or Audio, have a look at the corresponding sections in this repository and open an issue if you are unable to solve them.
+and copy your customized EFI folder into the newly mounted EFI partition. You should now be able to boot your computer without the USB flash drive attached. If you're having issues with specific parts like Wi-Fi, Bluetooth, or Audio, have a look at the corresponding sections in this repository and open an issue if you are unable to solve them.
 
 ## 🛠 Configuration
 This section talks about configuring the EFI folder for your exact hardware.
@@ -114,7 +114,7 @@ CPU power management is done by ```CPUFriend.kext``` while ```CPUFriendDataProvi
 ### 👈 Touchscreen
 If you don't need the touchscreen you can disable it to save power. Replace ```SSDT-TPDX.aml``` in ```EFI/OC/ACPI``` with the one inside the ```resources``` folder.
 
-### ℹ️ Changing Serial Number, Board Serial Number and SmUUID
+### ℹ️ Changing Serial Number, Board Serial Number, and SmUUID
 NOTE: With the stock Killer Wi-Fi card, iMessage will never work.
 
 To use iMessage and other Apple services, you need to generate your own serial numbers. This can be done using [Hackintool](https://www.tonymacx86.com/threads/release-hackintool-v3-x-x.254559/). Go to the “Serial“ tab and make sure model is set to ```MacBookPro15,1```. Use the barcode-with-apple button to check your generated serial numbers. If the website tells you that the serial number isn't valid, everything is fine. Otherwise, you have to generate a new set.
@@ -126,13 +126,13 @@ Next you will have to copy the following values from Hackintool to your ```confi
 
 Reboot and Apple services should work.
 
-If they don't, follow [this in-depth guide](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/iservices.html). It goes deeper into ROM, clearing NVRAM, clearing Keychain (missing this step might cause major issues) and much more.
+If they don't, follow [this in-depth guide](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/iservices.html). It goes deeper into ROM, clearing NVRAM, clearing Keychain (missing this step might cause major issues), and much more.
 
 ## 🔧 Tweaks
 This section talks about various optional tweaks that enhance your experience
 
 ### ⤵️ Undervolting
-Undervolting your CPU can reduce heat, improve performance and provide longer battery life. However, if done incorrectly, it may cause an unstable system. The ```tools``` folder contains a patched version of [VoltageShift](https://github.com/sicreative/VoltageShift).
+Undervolting your CPU can reduce heat, improve performance, and provide longer battery life. However, if done incorrectly, it may cause an unstable system. The ```tools``` folder contains a patched version of [VoltageShift](https://github.com/sicreative/VoltageShift).
 
 Using ```./voltageshift offset <CPU> <GPU> <CPUCache>``` you can adjust the voltage offset for the CPU, GPU, and cache. Safe starting values are ```-100, -75, -100```. From there you can start gradually lowering the values until your system gets unstable.
 
