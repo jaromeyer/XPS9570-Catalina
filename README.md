@@ -24,7 +24,7 @@ This is more of a compilation of information and configs from various repositori
 | **NVIDIA GPU** | ❌ Not working | Will never work because of Nvidia Optimus and Apple completely dropped Nvidia support beginning with Mojave. Thus it's completely disabled to save power. |
 | **PM981 SSD** | ❌ Not working | Even with [NVMeFix](https://github.com/acidanthera/NVMeFix), which promises to fix Kernel Panics caused by the PM981, there are random shutdowns. Just replace it with a SATA M.2 drive or a supported NVMe one. |
 | **Fingerprint reader** | ❌ Not working | Probably will never work, because proprietary Goodix drivers that only exist for Windows are needed. Disabled to save power. |
-| **SD Reader** | ❌ Not working | If you don't dual boot Windows, you can disable it in the BIOS to save power. |
+| **SD Reader** | ✅ Working  | Use [this](https://github.com/cholonam/Sinetek-rtsx) kext |
 
 ## ⬇️ Installation
 Follow this guide if you have never set up a Hackintosh before.
