@@ -1,7 +1,7 @@
 ![Screenshot](img/screenshot.png)
 
-# Dell XPS 15 9570 Catalina
-A collection of all resources needed to run macOS Catalina on a Dell XPS 15 9570
+# Dell XPS 15 9570 Catalina (and Big Sur)
+A collection of all resources needed to run macOS Catalina or Big Sur on a Dell XPS 15 9570
 
 ## 🔍 Overview
 This is more of a compilation of information and configs from various repositories and forums than a place where real development happens. This repository should contain everything needed to get Catalina up and running on your specific Dell XPS 9570 configuration.
