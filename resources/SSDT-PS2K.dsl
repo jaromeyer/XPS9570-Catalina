@@ -13,7 +13,7 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "ps2", 0)
                 Package(){},
                 "e037=64", // PrtSc=F13
                 "54=64", // cmd+PrtScr=F13
-                "e022=67", // play/pause=F16
+                // "e022=67", // play/pause=F16
                 "e065=68", // search=F17
                 "e052=69", // insert=F18
             },

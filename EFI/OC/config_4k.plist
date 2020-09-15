@@ -34,6 +34,12 @@
 				<key>Enabled</key>
 				<true/>
 				<key>Path</key>
+				<string>SSDT-PS2K.aml</string>
+			</dict>
+			<dict>
+				<key>Enabled</key>
+				<true/>
+				<key>Path</key>
 				<string>SSDT-TPDX.aml</string>
 			</dict>
 			<dict>
@@ -49,7 +55,7 @@
 				<string>SSDT-USBX.aml</string>
 			</dict>
 		</array>
-		<key>Block</key>
+		<key>Delete</key>
 		<array>
 			<dict>
 				<key>Comment</key>
@@ -66,17 +72,7 @@
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>Rename _WAK to ZWAK</string>
-				<key>Enabled</key>
-				<true/>
-				<key>Find</key>
-				<data>FDlfV0FLAQ==</data>
-				<key>Replace</key>
-				<data>FDlaV0FLAQ==</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Rename BRT6 to BRTX</string>
+				<string>Rename BRT6 to BRTX, pair with SSDT-BCKM</string>
 				<key>Enabled</key>
 				<true/>
 				<key>Find</key>
@@ -86,7 +82,17 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Rename USTP to One</string>
+				<string>Rename _WAK to ZWAK, pair with SSDT-DGPU</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Find</key>
+				<data>FDlfV0FLAQ==</data>
+				<key>Replace</key>
+				<data>FDlaV0FLAQ==</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Rename USTP to One, pair with SSDT-TPDX</string>
 				<key>Enabled</key>
 				<true/>
 				<key>Find</key>
@@ -96,7 +102,7 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Rename RP17.PXSX._RMV to XRMV</string>
+				<string>Rename RP17.PXSX._RMV to XRMV, pair with SSDT-TYPC</string>
 				<key>Enabled</key>
 				<true/>
 				<key>Find</key>
@@ -114,6 +120,8 @@
 			<true/>
 			<key>EnableWriteUnprotector</key>
 			<true/>
+			<key>ProvideCustomSlide</key>
+			<true/>
 			<key>SetupVirtualMap</key>
 			<true/>
 			<key>SyncRuntimePermissions</key>
@@ -124,10 +132,15 @@
 	<dict>
 		<key>Add</key>
 		<dict>
+			<key>PciRoot(0x0)/Pci(0x1c,0x0)/Pci(0x0,0x0)</key>
+			<dict>
+				<key>brcmfx-country</key>
+				<string>#a</string>
+			</dict>
 			<key>PciRoot(0x0)/Pci(0x1f,0x3)</key>
 			<dict>
-				<key>device-id</key>
-				<data>cKEAAA==</data>
+				<key>alc-delay</key>
+				<integer>500</integer>
 				<key>layout-id</key>
 				<integer>72</integer>
 			</dict>
@@ -135,6 +148,8 @@
 			<dict>
 				<key>AAPL,ig-platform-id</key>
 				<data>AACbPg==</data>
+				<key>agdpmod</key>
+				<string>vit9696</string>
 				<key>disable-external-gpu</key>
 				<data>AQAAAA==</data>
 				<key>dpcd-max-link-rate</key>
@@ -146,6 +161,8 @@
 				<key>enable-hdmi20</key>
 				<data>AQAAAA==</data>
 				<key>enable-lspcon-support</key>
+				<data>AQAAAA==</data>
+				<key>force-online</key>
 				<data>AQAAAA==</data>
 				<key>framebuffer-con1-alldata</key>
 				<data>AQUJAAAEAACHAQAA</data>
@@ -196,16 +213,6 @@
 			</dict>
 			<dict>
 				<key>BundlePath</key>
-				<string>AppleALC.kext</string>
-				<key>Enabled</key>
-				<true/>
-				<key>ExecutablePath</key>
-				<string>Contents/MacOS/AppleALC</string>
-				<key>PlistPath</key>
-				<string>Contents/Info.plist</string>
-			</dict>
-			<dict>
-				<key>BundlePath</key>
 				<string>CPUFriend.kext</string>
 				<key>Enabled</key>
 				<true/>
@@ -219,6 +226,16 @@
 				<string>CPUFriendDataProvider.kext</string>
 				<key>Enabled</key>
 				<true/>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>BundlePath</key>
+				<string>AppleALC.kext</string>
+				<key>Enabled</key>
+				<true/>
+				<key>ExecutablePath</key>
+				<string>Contents/MacOS/AppleALC</string>
 				<key>PlistPath</key>
 				<string>Contents/Info.plist</string>
 			</dict>
@@ -284,6 +301,14 @@
 			</dict>
 			<dict>
 				<key>BundlePath</key>
+				<string>AirportBrcmFixup.kext/Contents/PlugIns/AirPortBrcmNIC_Injector.kext</string>
+				<key>Enabled</key>
+				<true/>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>BundlePath</key>
 				<string>BrcmBluetoothInjector.kext</string>
 				<key>Enabled</key>
 				<true/>
@@ -342,11 +367,31 @@
 			</dict>
 			<dict>
 				<key>BundlePath</key>
+				<string>SMCDellSensors.kext</string>
+				<key>Enabled</key>
+				<true/>
+				<key>ExecutablePath</key>
+				<string>Contents/MacOS/SMCDellSensors</string>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>BundlePath</key>
 				<string>SMCProcessor.kext</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
 				<string>Contents/MacOS/SMCProcessor</string>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>BundlePath</key>
+				<string>Sinetek-rtsx.kext</string>
+				<key>Enabled</key>
+				<true/>
+				<key>ExecutablePath</key>
+				<string>Contents/MacOS/Sinetek-rtsx</string>
 				<key>PlistPath</key>
 				<string>Contents/Info.plist</string>
 			</dict>
@@ -420,9 +465,9 @@
 			<true/>
 			<key>CustomSMBIOSGuid</key>
 			<true/>
-			<key>DisableRtcChecksum</key>
+			<key>DisableIoMapper</key>
 			<true/>
-			<key>LapicKernelPanic</key>
+			<key>DisableRtcChecksum</key>
 			<true/>
 			<key>PowerTimeoutKernelPanic</key>
 			<true/>
@@ -444,15 +489,13 @@
 			<true/>
 			<key>Timeout</key>
 			<integer>2</integer>
-			<key>HideSelf</key>
-			<true/>
-			<key>PickerMode</key>
-			<string>External</string>
 		</dict>
 		<key>Debug</key>
 		<dict>
 			<key>DisplayLevel</key>
 			<integer>2147483650</integer>
+			<key>Target</key>
+			<integer>3</integer>
 		</dict>
 		<key>Security</key>
 		<dict>
@@ -478,14 +521,14 @@
 			<key>7C436110-AB2A-4BBB-A880-FE41995C9F82</key>
 			<dict>
 				<key>boot-args</key>
-				<string>brcmfx-country=#a agdpmod=vit9696 darkwake=1 igfxfw=2 alcdelay=500</string>
+				<string>darkwake=1 igfxfw=2</string>
 				<key>bootercfg</key>
 				<string>log=0 debug=0 level=0</string>
 				<key>csr-active-config</key>
 				<data>ZwAAAA==</data>
 			</dict>
 		</dict>
-		<key>Block</key>
+		<key>Delete</key>
 		<dict>
 			<key>4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14</key>
 			<array>
@@ -534,15 +577,15 @@
 			<true/>
 			<key>HideVerbose</key>
 			<true/>
+			<key>JumpstartHotPlug</key>
+			<true/>
 		</dict>
 		<key>ConnectDrivers</key>
 		<true/>
 		<key>Drivers</key>
 		<array>
-			<string>ApfsDriverLoader.efi</string>
 			<string>HfsPlus.efi</string>
 			<string>OpenRuntime.efi</string>
-			<string>NdkBootPicker.efi</string>
 		</array>
 		<key>Input</key>
 		<dict>
@@ -573,6 +616,8 @@
 		</dict>
 		<key>Quirks</key>
 		<dict>
+			<key>ReleaseUsbOwnership</key>
+			<true/>
 			<key>RequestBootVarRouting</key>
 			<true/>
 		</dict>

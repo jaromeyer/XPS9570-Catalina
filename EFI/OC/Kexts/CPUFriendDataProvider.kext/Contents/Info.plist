@@ -11,7 +11,7 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2001</string>
+	<string>1.0.0</string>
 	<key>CFBundleVersion</key>
 	<string>1.0.0</string>
 	<key>IOKitPersonalities</key>
