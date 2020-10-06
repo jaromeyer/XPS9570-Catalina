@@ -115,7 +115,7 @@ Next you will have to copy the following values from Hackintool to your `config.
 
 Reboot and Apple services should work.
 
-If they don't, follow [this in-depth guide](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/iservices.html). It goes deeper into ROM, clearing NVRAM, clearing Keychain (missing this step might cause major issues), and much more.
+If they don't, follow [this in-depth guide](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html#customer-code-error). It goes deeper into ROM, clearing NVRAM, clearing Keychain (missing this step might cause major issues), and much more.
 
 ## 🔧 Tweaks
 This section talks about various optional tweaks that enhance your experience
