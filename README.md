@@ -97,6 +97,8 @@ sudo pmset -a proximitywake 0
 sudo pmset -b tcpkeepalive 0 (optional)
 ```
 
+CFG lock determines if the bios lets the OS directly control power management. Without it we can't boot unless we use AppleCpuPmCfgLock and/or AppleXcpmCfgLock in OpenCore. In short it's probably a good idea to allow MacOS to natively control power management vs. emulate it since it grants better (quieter) fan control and prevents power throttlings. To disable CFG Lock and let macOS do power management follow @mr-prez guide [here](https://github.com/jaromeyer/XPS9570-Catalina/issues/44#issuecomment-708540167)
+
 ### ⚡️ Performance
 CPU power management is done by `CPUFriend.kext` while `CPUFriendDataProvider.kext` defines how it should be done. `CPUFriendDataProvider.kext` is generated for a specific CPU and power setting. The one supplied in this repository was made for the i7-8750H and is optimized for maximum performance. In case you have another CPU or would rather sacrifice some performance in trade for more battery life, you can use the script [one-key-cpufriend](https://github.com/stevezhengshiqi/one-key-cpufriend) from the `tools` folder to generate your own ```CPUFriendDataProvider.kext```.
 
