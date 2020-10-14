@@ -12,15 +12,15 @@ This is more of a compilation of information and configs from various repositori
 | ------------- | ------------- | ------------- |
 | **Intel iGPU** | ✅ Working | Fully supported. Both 2560x1440@144Hz over HDMI and 4k@60Hz over DisplayPort have been tested |
 | **Trackpad** |  ✅ Working | Full gesture support. Probably the best trackpad experience on a non-mac.
-| **iMessages and App Store** | ✅ Working | Just follow the  [guide below](#ℹ️-changing-serial-number,-board-serial-number-and-smuuid) |
-| **Speakers and Headphones** | ✅ Working | To permanently fix headphones follow the instructions [here](#🔈-audio) |
+| **iMessages and App Store** | ✅ Working | Just follow the  [guide below](#%E2%84%B9%EF%B8%8F-changing-serial-number-board-serial-number-and-smuuid) |
+| **Speakers and Headphones** | ✅ Working | To permanently fix headphones follow the instructions [here](#-audio) |
 | **Built-in Microphone** | ✅ Working |
 | **Webcam** | ✅ Working | Fully working, is detected as Integrated Webcam |
 | **Handoff** | ✅ Working |
 | **Unlock with Watch** | 🔶 Buggy | Works, but it tends to disable itself after sleep or reboot |
-| **Wi-Fi/BT** | 🔶 Working, but not OOB | The stock Killer card must be replaced with a compatible one. See [here](#📶-Wi-Fi/Bluetooth) |
+| **Wi-Fi/BT** | 🔶 Working, but not OOB | The stock Killer card must be replaced with a compatible one. See [here](#-wi-fibluetooth) |
 | **Thunderbolt/USB-C** | 🔶 Partially working | Normal USB-C and charging work as intended. Thunderbolt works, but hotplugging is broken. Thunderbolt devices and docking stations have to be attached prior to boot to work properly. However, display over Thunderbolt seems to hotplug fine. |
-| **Touchscreen** | 🔶 Working, but high power consumption | The touchscreen works fine and emulates a huge trackpad. This means you can do all native macOS gestures. However, power management isn't that great. [Battery drain](#1) is very high. If you don't need it, you can [disable](#👈-touchscreen) it completely. |
+| **Touchscreen** | 🔶 Working, but high power consumption | The touchscreen works fine and emulates a huge trackpad. This means you can do all native macOS gestures. However, power management isn't that great. [Battery drain](https://github.com/jaromeyer/XPS9570-Catalina/issues/1) is very high. If you don't need it, you can [disable](#-display) it completely. |
 | **NVIDIA GPU** | ❌ Not working | Will never work because of Nvidia Optimus and Apple completely dropped Nvidia support beginning with Mojave. Thus it's completely disabled to save power. |
 | **PM981 SSD** | ❌ Not working | Even with [NVMeFix](https://github.com/acidanthera/NVMeFix), which promises to fix Kernel Panics caused by the PM981, there are random shutdowns. Just replace it with a SATA M.2 drive or a supported NVMe one. |
 | **Fingerprint reader** | ❌ Not working | Probably will never work, because proprietary Goodix drivers that only exist for Windows are needed. Disabled to save power. |
@@ -51,7 +51,7 @@ Find the EFI partition of your USB flash drive. Normally its entry 1 under /dev/
 Now that you have access to the EFI partition, the real fun starts.
 
 ### Configuring EFI
-Clone this repository to get the base EFI folder as well as all additional kexts and patches. Now you will have to prepare the EFI folder for your exact hardware configuration. There are four different configs. Find the one that matches your specific XPS model and rename it to ```config.plist```. Read through the [configuration section](#configuration) to learn more about the different options. Once everything is configured properly, copy the folder into the EFI partition you have mounted in the previous step.
+Clone this repository to get the base EFI folder as well as all additional kexts and patches. Now you will have to prepare the EFI folder for your exact hardware configuration. There are four different configs. Find the one that matches your specific XPS model and rename it to ```config.plist```. Read through the [configuration section](#-configuration) to learn more about the different options. Once everything is configured properly, copy the folder into the EFI partition you have mounted in the previous step.
 
 ### Booting the installer
 After having created the installer USB flash drive, you are ready to install macOS on your XPS. Make sure SSD mode is set to AHCI mode instead of RAID in BIOS otherwise, macOS won't be able to detect your SSD. Select your USB flash drive as boot media and go through the macOS installer like you would on a real mac. Once you have come to the desktop, advance to the next step.
@@ -147,4 +147,5 @@ You probably have a Samsung PM981 SSD. As stated above, we're working on a perma
 - [bavariancake](https://github.com/bavariancake/XPS9570-macOS) and [LuletterSoul](https://github.com/LuletterSoul/Dell-XPS-15-9570-macOS-Mojave) for providing detailed installation guides and configurations for the XPS 9570
 - [xxxzc](https://github.com/xxxzc/xps15-9550-macos) for providing OpenCore support for the XPS 9570
 - [frbuccoliero](https://github.com/frbuccoliero) for PM981 related testing and extending the guide
+- [mr-prez](https://github.com/mr-prez) for the Native Power Management guide
 - Everyone else involved in Hackintosh development
