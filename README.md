@@ -1,3 +1,5 @@
+> :warning: **Important**: Thank you for all the support! Unfortunately, I currently don't have the time to continue updating this repo. The current EFI has been working great for me, even with the latest Big Sur Beta. However, if you are experiencing problems or just want to be on the bleeding edge, I highly recommend checking out [xxxzc's repo](https://github.com/xxxzc/xps15-9570-macos) which is still actively maintaining.
+
 ![Screenshot](img/screenshot.png)
 
 # Dell XPS 15 9570 Catalina (and Big Sur)
