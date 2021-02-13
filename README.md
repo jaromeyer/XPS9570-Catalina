@@ -1,14 +1,12 @@
-> :warning: **Important**: Thank you for all the support! Unfortunately, I currently don't have the time to continue updating this repo. The current EFI has been working great for me, even with the latest Big Sur Beta. However, if you are experiencing problems or just want to be on the bleeding edge, I highly recommend checking out [xxxzc's repo](https://github.com/xxxzc/xps15-9570-macos) which is actively being maintained.
-
 ![Screenshot](img/screenshot.png)
 
-# Dell XPS 15 9570 Catalina (and Big Sur)
-A collection of all resources needed to run macOS Catalina or Big Sur on a Dell XPS 15 9570
+# Dell XPS 15 9570 Big Sur
+A collection of all resources needed to run macOS Big Sur on a Dell XPS 15 9570
 
 ## 🔍 Overview
-This is more of a compilation of information and configs from various repositories and forums than a place where real development happens. This repository should contain everything needed to get Catalina up and running on your specific Dell XPS 9570 configuration.
+This is more of a compilation of information and configs from various repositories and forums than a place where real development happens. This repository should contain everything needed to get Big Sur up and running on your specific Dell XPS 9570 configuration.
 
-## What works and what doesn't
+## ℹ️ Current Status
 
 | Feature | Status | Notes |
 | ------------- | ------------- | ------------- |
@@ -18,6 +16,7 @@ This is more of a compilation of information and configs from various repositori
 | **Speakers and Headphones** | ✅ Working | To permanently fix headphones follow the instructions [here](#-audio) |
 | **Built-in Microphone** | ✅ Working |
 | **Webcam** | ✅ Working | Fully working, is detected as Integrated Webcam |
+| **SD Reader** | ✅ Working | Fully supported, but rather slow |
 | **Handoff** | ✅ Working |
 | **Unlock with Watch** | 🔶 Buggy | Works, but it tends to disable itself after sleep or reboot |
 | **Wi-Fi/BT** | 🔶 Working, but not OOB | The stock Killer card must be replaced with a compatible one. See [here](#-wi-fibluetooth) |
@@ -26,23 +25,23 @@ This is more of a compilation of information and configs from various repositori
 | **NVIDIA GPU** | ❌ Not working | Will never work because of Nvidia Optimus and Apple completely dropped Nvidia support beginning with Mojave. Thus it's completely disabled to save power. |
 | **PM981 SSD** | ❌ Not working | Even with [NVMeFix](https://github.com/acidanthera/NVMeFix), which promises to fix Kernel Panics caused by the PM981, there are random shutdowns. Just replace it with a SATA M.2 drive or a supported NVMe one. |
 | **Fingerprint reader** | ❌ Not working | Probably will never work, because proprietary Goodix drivers that only exist for Windows are needed. Disabled to save power. |
-| **SD Reader** | ✅ Working | Fully supported, but rather slow |
 
-## ⬇️ Installation
+
+## 💾 Installation
 Follow this guide if you have never set up a Hackintosh before.
 
 ### Creating a bootable installer
-To start you need a USB flash drive with at least 12GB of available storage and a local copy of macOS. The installer for macOS Catalina can be obtained from [here](https://itunes.apple.com/de/app/macos-catalina/id1466841314?ls=1&mt=12).
+To start you need a USB flash drive with at least 12GB of available storage and a local copy of macOS. The installer for macOS Big Sur can be obtained from [here](https://apps.apple.com/us/app/macos-big-sur/id1526878132?mt=12).
 
 Next, you want to format the USB flash drive using Disk Utility. Click on “View” in the toolbar and choose “Show All Devices” to see all physical disks instead of only partitions. Select your USB flash drive, name it “MyVolume” and format it HFS+/Mac OS Extended (Journaled) with GUID Partition Map.
 
 Now you are ready to create the installation media. Use the following command to start the process. It may take a while depending on the USB flash drive you are using.
 
-`sudo /Applications/Install\ macOS\ Catalina.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume`
+`sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume`
 
 If your USB flash drive has a different name, replace ```MyVolume``` with the name of your volume.
 
-After the installer says that it's done, the volume now contains the macOS Catalina installer and is ready to boot on a real Mac. However, because we are building a Hackintosh, we have to take an additional step and install the OpenCore bootloader. To do this, you first have to mount the EFI partition. This is where OpenCore and all its configuration files go. Use the following command to list all disks.
+After the installer says that it's done, the volume now contains the macOS Big Sur installer and is ready to boot on a real Mac. However, because we are building a Hackintosh, we have to take an additional step and install the OpenCore bootloader. To do this, you first have to mount the EFI partition. This is where OpenCore and all its configuration files go. Use the following command to list all disks.
 
 `sudo diskutil list`
 
@@ -53,7 +52,7 @@ Find the EFI partition of your USB flash drive. Normally its entry 1 under /dev/
 Now that you have access to the EFI partition, the real fun starts.
 
 ### Configuring EFI
-Clone this repository to get the base EFI folder as well as all additional kexts and patches. Now you will have to prepare the EFI folder for your exact hardware configuration. There are four different configs. Find the one that matches your specific XPS model and rename it to ```config.plist```. Read through the [configuration section](#-configuration) to learn more about the different options. Once everything is configured properly, copy the folder into the EFI partition you have mounted in the previous step.
+Clone this repository to get the base EFI folder as well as all additional kexts and patches. Now you will have to prepare the EFI folder for your exact hardware configuration. There are two different configs. Find the one that matches your specific XPS model and rename it to `config.plist`. Read through the [hardware section](#-Hardware) to learn more about the different options. Once everything is configured properly, copy the folder into the EFI partition you have mounted in the previous step.
 
 ### Booting the installer
 After having created the installer USB flash drive, you are ready to install macOS on your XPS. Make sure SSD mode is set to AHCI mode instead of RAID in BIOS otherwise, macOS won't be able to detect your SSD. Select your USB flash drive as boot media and go through the macOS installer like you would on a real mac. Once you have come to the desktop, advance to the next step.
@@ -65,18 +64,18 @@ Congratulations! You have successfully booted and installed macOS. At this point
 
 and copy your customized EFI folder into the newly mounted EFI partition. You should now be able to boot your computer without the USB flash drive attached. If you're having issues with specific parts like Wi-Fi, Bluetooth, or Audio, have a look at the corresponding sections in this repository and open an issue if you are unable to solve them.
 
-## 🛠 Configuration
+## 🛠 Hardware
 This section talks about configuring the EFI folder for your exact hardware.
 
-Almost all changes are done inside the OpenCore configuration file. Use the provided version of [ProperTree](https://github.com/corpnewt/ProperTree) to edit `EFI/OC/config.plist`.
+Almost all changes are done inside the OpenCore configuration file. I strongly recommend using either [ProperTree](https://github.com/corpnewt/ProperTree) or Xcode to edit `EFI/OC/config.plist`.
 
 ### 🔈 Audio
-By default, the audio can be a bit buggy. When using headphones, after some time the audio randomly stops. Sometimes un- and replugging the headphones works, but that's pretty annoying and unreliable. To permanently fix this issue you will have to install [ComboJack](https://github.com/hackintosh-stuff/ComboJack/tree/master/ComboJack_Installer) from the ```tools``` folder by running `install.sh`.
+Without any modifications, the headphone jack is buggy. External microphones aren't detected and the audio output may randomly stop working or start making weird noises. Sometimes un- and replugging the headphones works, but that's pretty annoying and unreliable. To permanently fix this issue you will have to install [this fork of ComboJack](https://github.com/lvs1974/ComboJack).
 
 ### 📶 Wi-Fi/Bluetooth
 The stock Killer Wi-Fi card will never be supported in macOS. So to use Wi-Fi, you will have to replace it for a supported card. This repository is configured to work out-of-the-box with both the Dell DW1830 and DW1560 wireless adapter.
 
-Another option for a fraction of the price is the [Dell DW1820a](https://www.aliexpress.com/item/32918457901.html). However it is a bit slower than the cards mentioned above and in my experience has problems with some 5GHz networks.
+Another option for a fraction of the price would be the [Dell DW1820a](https://www.aliexpress.com/item/32918457901.html). However it is a bit slower than the cards mentioned above and in my experience has problems with some 5GHz networks.
 
 ### 📺 Display
 This repository contains configs for both FHD and 4K. Just choose the one that matches your setup and rename it to `config.plist`.
@@ -99,13 +98,10 @@ sudo pmset -a proximitywake 0
 sudo pmset -b tcpkeepalive 0 (optional)
 ```
 
-CFG lock determines if the bios lets the OS directly control power management. Without it we can't boot unless we use AppleCpuPmCfgLock and/or AppleXcpmCfgLock in OpenCore. In short it's probably a good idea to allow MacOS to natively control power management vs. emulate it since it grants better (quieter) fan control and prevents power throttlings. To disable CFG Lock and let macOS do power management follow @mr-prez guide [here](https://github.com/jaromeyer/XPS9570-Catalina/issues/44#issuecomment-708540167)
+For the best power management it's recommended to disable CFG lock and let macOS do the power management. Follow [this guide](https://github.com/jaromeyer/XPS9570-Catalina/issues/44#issuecomment-708540167) to do so. For more information about CFG lock, have a look [here](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html).
 
 ### ⚡️ Performance
-CPU power management is done by `CPUFriend.kext` while `CPUFriendDataProvider.kext` defines how it should be done. `CPUFriendDataProvider.kext` is generated for a specific CPU and power setting. The one supplied in this repository was made for the i7-8750H and is optimized for maximum performance. In case you have another CPU or would rather sacrifice some performance in trade for more battery life, you can use the script [one-key-cpufriend](https://github.com/stevezhengshiqi/one-key-cpufriend) from the `tools` folder to generate your own ```CPUFriendDataProvider.kext```.
-
-### 👈 Touchscreen
-If you don't need the touchscreen you can disable it to save power. Replace `SSDT-TPDX.aml` in `EFI/OC/ACPI` with the one inside the `resources` folder.
+CPU power management is done by `CPUFriend.kext` while `CPUFriendDataProvider.kext` defines how it should be done. `CPUFriendDataProvider.kext` is generated for a specific CPU and power setting. The one supplied in this repository was made for the i7-8750H. In case you have another CPU, you can use [one-key-cpufriend](https://github.com/stevezhengshiqi/one-key-cpufriend) to generate your own `CPUFriendDataProvider.kext`.
 
 ### ℹ️ Changing Serial Number, Board Serial Number, and SmUUID
 NOTE: With the stock Killer Wi-Fi card, iMessage will never work.
@@ -125,20 +121,14 @@ If they don't, follow [this in-depth guide](https://dortania.github.io/OpenCore-
 This section talks about various optional tweaks that enhance your experience
 
 ### ⤵️ Undervolting
-Undervolting your CPU can reduce heat, improve performance, and provide longer battery life. However, if done incorrectly, it may cause an unstable system. The ```tools``` folder contains a patched version of [VoltageShift](https://github.com/sicreative/VoltageShift).
+Undervolting your CPU can reduce heat, improve performance, and provide longer battery life. However, if done incorrectly, it may cause an unstable system. My preferred method is using [VoltageShift](https://github.com/sicreative/VoltageShift).
 
 Using `./voltageshift offset <CPU> <GPU> <CPUCache>` you can adjust the voltage offset for the CPU, GPU, and cache. Safe starting values are ```-100, -75, -100```. From there you can start gradually lowering the values until your system gets unstable.
 
 ## 🤔 Frequently Asked Questions
 
-### Why my trackpad doesn't work?
-In macOS, the “PrintScreen“ button (PrtScr, to the right of F12) disables/enables the trackpad instead of disabling/enabling wifi as it says. Probably you just pressed that button by accident.
-
 ### I have a Samsung PM981 SSD, will it work?
-The Samsung PM981 (or more precise the controller it uses) is known to cause random kernel panics in macOS. Up until now, there was no way to even install macOS on the PM981 and the only option was to replace it with either a SATA or a known working NVMe SSD. However, recently a new set of patches, namely [NVMeFix](https://github.com/acidanthera/NVMeFix) was released. It greatly improves compatibility with non-apple SSDs including the PM981. Thanks to those patches, you can now install macOS, but there is still a chance for kernel panics to occur while booting. In this case, you can clear the NVRAM from the OpenCore boot menu as a workaround to get it booting again. Since I don't own a PM981 myself, I can't debug this issue, but [frbuccoliero](https://github.com/frbuccoliero) is currently testing a potential fix.
-
-### My XPS reboots once the loading bar with the apple has reached approximately 90%
-You probably have a Samsung PM981 SSD. As stated above, we're working on a permanent fix.  In the meantime, you will have to reset NVRAM from the OpenCore menu before each boot.
+The Samsung PM981 (or more precise the controller it uses) is known to cause random kernel panics in macOS. Up until now, there was no way to even install macOS on the PM981 and the only option was to replace it with either a SATA or a known working NVMe SSD. However, recently a new set of patches, namely [NVMeFix](https://github.com/acidanthera/NVMeFix) was released. It greatly improves compatibility with non-apple SSDs including the PM981. Thanks to those patches, you can now install macOS, but there is still a chance for kernel panics to occur while booting.
 
 ## Acknowledgments
 - [acidanthera](https://github.com/acidanthera) for providing almost all kexts and drivers
