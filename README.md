@@ -1,3 +1,5 @@
+> :warning: Some parts of this guide are kinda outdated and don't apply to the current state of this repo anymore.
+
 ![Screenshot](img/screenshot.png)
 
 # Dell XPS 15 9570 Big Sur
