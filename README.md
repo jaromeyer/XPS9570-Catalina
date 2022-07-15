@@ -1,4 +1,4 @@
-> :warning: Some parts of this guide are kinda outdated and don't apply to the current state of this repo anymore.
+> :warning: Since I have completely switched over to using Linux, this repo won't receive any updates in the forseeable future. Nevertheless most parts of the guide still apply and there are various other great repos for the XPS 9570.
 
 ![Screenshot](img/screenshot.png)
 
