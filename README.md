@@ -3,10 +3,10 @@
 ![Screenshot](img/screenshot.png)
 
 # Dell XPS 15 9570 Big Sur
-A collection of all resources needed to run macOS Big Sur on a Dell XPS 15 9570
+A collection of all resources needed to run macOS Big Sur on a Dell XPS 15 9570 or Dell Precision 5530
 
 ## 🔍 Overview
-This is more of a compilation of information and configs from various repositories and forums than a place where real development happens. This repository should contain everything needed to get Big Sur up and running on your specific Dell XPS 9570 configuration.
+This is more of a compilation of information and configs from various repositories and forums than a place where real development happens. This repository should contain everything needed to get Big Sur up and running on your specific Dell XPS 9570 or Dell Precision 5530 configuration.
 
 ## ℹ️ Current Status
 
@@ -21,7 +21,7 @@ This is more of a compilation of information and configs from various repositori
 | **SD Reader** | ✅ Working | Fully supported, but rather slow |
 | **Handoff** | ✅ Working |
 | **Unlock with Watch** | 🔶 Buggy | Works, but it tends to disable itself after sleep or reboot |
-| **Wi-Fi/BT** | 🔶 Working, but not OOB | The stock Killer card must be replaced with a compatible one. See [here](#-wi-fibluetooth) |
+| **Wi-Fi/BT** | 🔶 Working for some wireless adapters | The stock Killer card must be replaced with a compatible one. See [here](#-wi-fibluetooth) |
 | **Thunderbolt/USB-C** | 🔶 Partially working | Normal USB-C and charging work as intended. Thunderbolt works, but hotplugging is broken. Thunderbolt devices and docking stations have to be attached prior to boot to work properly. However, display over Thunderbolt seems to hotplug fine. |
 | **Touchscreen** | 🔶 Working, but high power consumption | The touchscreen works fine and emulates a huge trackpad. This means you can do all native macOS gestures. However, power management isn't that great. [Battery drain](https://github.com/jaromeyer/XPS9570-Catalina/issues/1) is very high. If you don't need it, you can [disable](#-display) it completely. |
 | **NVIDIA GPU** | ❌ Not working | Will never work because of Nvidia Optimus and Apple completely dropped Nvidia support beginning with Mojave. Thus it's completely disabled to save power. |
@@ -75,7 +75,7 @@ Almost all changes are done inside the OpenCore configuration file. I strongly r
 Without any modifications, the headphone jack is buggy. External microphones aren't detected and the audio output may randomly stop working or start making weird noises. Sometimes un- and replugging the headphones works, but that's pretty annoying and unreliable. To permanently fix this issue you will have to install [this fork of ComboJack](https://github.com/lvs1974/ComboJack).
 
 ### 📶 Wi-Fi/Bluetooth
-The stock Killer Wi-Fi card will never be supported in macOS. So to use Wi-Fi, you will have to replace it for a supported card. This repository is configured to work out-of-the-box with both the Dell DW1830 and DW1560 wireless adapter.
+The stock Killer Wi-Fi card will never be supported in macOS. So to use Wi-Fi, you will have to replace it for a supported card. This repository is configured to work out-of-the-box with Dell DW1830, Dell DW1560, and Intel wireless adapters. The Intel adapter in the Precision 5530 works OOB.
 
 Another option for a fraction of the price would be the [Dell DW1820a](https://www.aliexpress.com/item/32918457901.html). However it is a bit slower than the cards mentioned above and in my experience has problems with some 5GHz networks.
 
